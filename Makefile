@@ -28,9 +28,6 @@ all: xow
 xow: $(OBJECTS)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-%.o: %.cpp
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
-
 firmware.o: firmware.bin
 	$(LD) -r -b binary -z noexecstack -o $@ $<
 
