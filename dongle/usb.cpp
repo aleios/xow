@@ -37,12 +37,14 @@ UsbDevice::UsbDevice(
         throw UsbException("Error opening device", error);
     }
 
+#ifdef USB_RESET
     error = libusb_reset_device(handle);
 
     if (error)
     {
         throw UsbException("Error resetting device", error);
     }
+#endif
 
     error = libusb_set_configuration(handle, 1);
 

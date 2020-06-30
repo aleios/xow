@@ -1412,6 +1412,7 @@ bool Mt76::loadFirmware()
 {
     if (controlRead(MT_FCE_DMA_ADDR, MT_VEND_READ_CFG))
     {
+#ifdef USB_RESET
         Log::debug("Firmware already loaded, resetting...");
 
         uint32_t patch = controlRead(MT_RF_PATCH, MT_VEND_READ_CFG);
@@ -1433,6 +1434,10 @@ bool Mt76::loadFirmware()
 
             return false;
         }
+#else
+        Log::debug("Firmware already loaded...");
+        return true;
+#endif
     }
 
     DmaConfig config = {};
